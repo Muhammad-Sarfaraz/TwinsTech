@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Project;
-use Auth;
 
-class ProjectController extends Controller
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $portfolios=Project::all();
-        return view('back-end.portfolio.index',compact('portfolios'));
+       echo "Hello";
     }
 
     /**
@@ -27,7 +24,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('back-end.portfolio.create');
+        //
     }
 
     /**
@@ -38,30 +35,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //print_r($request->all());
-        if(Auth::check()){
-            $data= new Project();
-
-            //Project::insert($request->except('_token'));
-            $folder = "back-end/project/";
-            $pdate=date('d-m-Y');
-            $data->title=$request->title;
-            $data->purl=$request->purl;
-            $data->description=$request->description;
-            $data->pdate=$pdate;         
-           
-            
-            if($request->hasFile('image'))
-        {
-            $data->image=$request->image->store('public/image/slider');
-        }
-            
-
-            $data->save()->with('status','Successfully Inserted');;
-    }
-            return back();
-
-
+        //
     }
 
     /**
@@ -72,7 +46,7 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        echo "hello";
     }
 
     /**
@@ -84,6 +58,12 @@ class ProjectController extends Controller
     public function edit($id)
     {
         //
+    }
+
+
+    public function feedback()
+    {
+        echo "hello";
     }
 
     /**
@@ -106,7 +86,6 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        Project::find($id)->delete();
-        return back()->with('status','Successfully Deleted');
+        //
     }
 }

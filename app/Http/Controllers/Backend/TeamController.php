@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Project;
+use App\Team;
 use Auth;
 
-class ProjectController extends Controller
+class TeamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $portfolios=Project::all();
-        return view('back-end.portfolio.index',compact('portfolios'));
+        $members=Team::all();
+       return view('back-end/team/view')->with(compact('members'));
     }
 
     /**
@@ -27,7 +27,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('back-end.portfolio.create');
+        return view('back-end/team/add');
     }
 
     /**
@@ -38,30 +38,20 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //print_r($request->all());
-        if(Auth::check()){
-            $data= new Project();
+        $team=new Team;
 
-            //Project::insert($request->except('_token'));
-            $folder = "back-end/project/";
-            $pdate=date('d-m-Y');
-            $data->title=$request->title;
-            $data->purl=$request->purl;
-            $data->description=$request->description;
-            $data->pdate=$pdate;         
-           
-            
-            if($request->hasFile('image'))
-        {
-            $data->image=$request->image->store('public/image/slider');
-        }
-            
+        $team->name=$request->name;
+        $team->position=$request->position;
+        $team->education=$request->education;
+        $team->url=$request->url;
+        $team->description=$request->description;
+        $team->image=$request->image->store('public/backend/team');
 
-            $data->save()->with('status','Successfully Inserted');;
-    }
-            return back();
+        $team->save();
 
-
+        return back()->with('status','Sucessfully Added!!!');
+       
+        
     }
 
     /**
@@ -106,7 +96,6 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        Project::find($id)->delete();
-        return back()->with('status','Successfully Deleted');
+        //
     }
 }

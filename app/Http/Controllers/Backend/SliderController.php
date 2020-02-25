@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Project;
+use App\Slider;
 use Auth;
 
-class ProjectController extends Controller
+class SliderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $portfolios=Project::all();
-        return view('back-end.portfolio.index',compact('portfolios'));
+
+        $images=Slider::all();
+        return view('back-end.gallery.slider.slider')->with(compact('images'));
     }
 
     /**
@@ -27,7 +28,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('back-end.portfolio.create');
+        //
     }
 
     /**
@@ -38,30 +39,28 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //print_r($request->all());
-        if(Auth::check()){
-            $data= new Project();
+       //print_r($request->all());
 
-            //Project::insert($request->except('_token'));
-            $folder = "back-end/project/";
-            $pdate=date('d-m-Y');
-            $data->title=$request->title;
-            $data->purl=$request->purl;
-            $data->description=$request->description;
-            $data->pdate=$pdate;         
-           
-            
-            if($request->hasFile('image'))
-        {
-            $data->image=$request->image->store('public/image/slider');
-        }
-            
+      // Slider::insert([$request->except('_token')]);
+      if(Auth::check()){
 
-            $data->save()->with('status','Successfully Inserted');;
-    }
-            return back();
+      $image = new Slider;
+
+        $image->title=$request->title;
+        $image->active=$request->active;
 
 
+
+        $folder = "gallery/slider/";
+        $pdate=date('d-m-Y');
+
+
+        $image->image=$request->image->store('public/backend/gallery/slider');
+       
+       
+        $image->save();
+      }
+       return back()->with('status','Sucessfully Uploaded!!!');
     }
 
     /**
@@ -106,7 +105,9 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        Project::find($id)->delete();
-        return back()->with('status','Successfully Deleted');
+      //  echo $id;
+
+      Slider::find($id)->delete();
+      return back()->with('status','Sucessfully Deleted!!!');
     }
 }

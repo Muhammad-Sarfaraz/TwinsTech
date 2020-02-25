@@ -11,23 +11,16 @@
                             <li class="menu-title">Navigation</li>
 
                             <li>
-                                <a href="javascript: void(0);">
+                                <a href="{{route('admin.dashboard')}}">
                                     <i class="la la-dashboard"></i>
-                                    <span class="badge badge-info badge-pill float-right">2</span>
+                                    <span class="badge badge-info badge-pill float-right"></span>
                                     <span> Dashboards </span>
                                 </a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <li>
-                                        <a href="index.html">Dashboard 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="dashboard-2.html">Dashboard 2</a>
-                                    </li>
-                                </ul>
+                               
                             </li>
 
                             <li>
-                                <a href="javascript: void(0);">
+                                <a href="#">
                                     <i class="la la-cube"></i>
                                     <span> Portfolio </span>
                                     <span class="menu-arrow"></span>
@@ -59,6 +52,29 @@
                                     </li>
                                 </ul>
                             </li>
+
+                            <li>
+                                <a href="javascript: void(0);">
+                                <i class="la la-briefcase"></i>
+                                    <span> Client </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li>
+                                        <a href="email-inbox.html">Add Client</a>
+                                    </li>
+                                    <li>
+                                        <a href="email-read.html">View Client</a>
+                                    </li>
+                                    <li>
+                                        <a href="email-read.html">View Feedback</a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
+
+
+
                 
                             <li>
                                 <a href="javascript: void(0);">
@@ -68,10 +84,10 @@
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li>
-                                        <a href="email-inbox.html">Add Member</a>
+                                        <a href="{{route('team.create')}}">Add Member</a>
                                     </li>
                                     <li>
-                                        <a href="email-read.html">View Member</a>
+                                        <a href="{{route('team.index')}}">View Member</a>
                                     </li>
                                     
                                 </ul>
@@ -79,7 +95,41 @@
 
                             <li>
                                 <a href="javascript: void(0);">
-                                    <i class="la la-file-text-o"></i>
+                                <i class="la la-file-text-o"></i>
+                                    <span> Blog </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li>
+                                        <a href="email-inbox.html">New Post</a>
+                                    </li>
+                                    <li>
+                                        <a href="email-read.html">View Post</a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript: void(0);">
+                                <i class="la la-picture-o"></i>
+                                    <span>Gallery</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li>
+                                        <a href="{{route('slider.index')}}">Slider</a>
+                                    </li>
+                                    <li>
+                                        <a href="email-read.html">View Image</a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="la la-copy"></i>
                                     <span> Pages </span>
                                     <span class="menu-arrow"></span>
                                 </a>
@@ -91,29 +141,49 @@
                                 </ul>
                             </li>
 
-                           
+
+                            
+
 
                             <li>
                                 <a href="javascript: void(0);">
-                                    <i class="la la-plus-square-o"></i>
-                                    <span> Multi Level </span>
+                                <i class="la la-wrench"></i>
+                                    <span> Site Settings </span>
                                     <span class="menu-arrow"></span>
                                 </a>
-                                <ul class="nav-second-level nav" aria-expanded="false">
+                                <ul class="nav-second-level" aria-expanded="false">
                                     <li>
-                                        <a href="javascript: void(0);">Level 1.1</a>
+                                        <a href="email-inbox.html">General Information</a>
                                     </li>
                                     <li>
-                                        <a href="javascript: void(0);" aria-expanded="false">Level 1.2
-                                            <span class="menu-arrow"></span>
-                                        </a>
-                                        <ul class="nav-third-level nav" aria-expanded="false">
-                                            <li>
-                                                <a href="javascript: void(0);">Level 2.1</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript: void(0);">Level 2.2</a>
-                                            </li>
+                                        <a href="email-read.html">Backup</a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript: void(0);">
+                                <i class="la la-gears"></i>
+                                    <span>ERP</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li>
+                                        <a href="email-inbox.html">Current Project</a>
+                                    </li>
+                                    <li>
+                                        <a href="email-inbox.html"></a>
+                                    </li>
+                                    <li>
+                                        <a href="email-read.html"></a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
+                          
+                           
+
                                         </ul>
                                     </li>
                                 </ul>

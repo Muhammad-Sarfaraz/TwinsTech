@@ -41,6 +41,31 @@ Route::group([
     // Route::get('/project/delete/{id}','ProjectController@destroy')->name('project.destroy');
 
 //Portfolio
+
+//Dashboard
+
+//Client
+Route::resource('client','ClientController');
+Route::get('client/feedback','ClientController@feedback');
+
+
+//Blog
+Route::resource('blog','BlogController');
+
+
+//Team
+Route::resource('team','TeamController');
+
+
+//Slider
+Route::resource('slider','SliderController');
+Route::get('slider/destroy/{id}','SliderController@destroy');
+
+
+Route::get('/dashboard','DashboardController@index')->name('admin.dashboard');
+
+
+
 Route::get('/portfolio','PortfolioController@index')->name('portfolio.index');
     Route::get('/portfolio/create','PortfolioController@create')->name('portfolio.create');
     Route::post('/portfolio/store','PortfolioController@store')->name('portfolio.store');
@@ -49,6 +74,9 @@ Route::get('/portfolio','PortfolioController@index')->name('portfolio.index');
     Route::get('/portfolio/delete/{id}','PortfolioController@destroy')->name('portfolio.destroy');
 
 });
+
+
+
 
 
 
