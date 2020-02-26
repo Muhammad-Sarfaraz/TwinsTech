@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Client;
-use DB;
 
-class ClientController extends Controller
+class SettingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +14,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //$clients=Client::join('done', 'done.id', '=', 'work.work_done')
-        $clients=DB::table('feedback')
-        ->join('clients', 'clients.id', '=', 'feedback.client_id')
-       ->get();
-       //return view('back-end.client.view')->with(compact('clients'));
-
-       return $clients;
+        //
     }
 
     /**
@@ -32,7 +24,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view ('back-end.client.add');
+        //
     }
 
     /**
@@ -43,32 +35,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        
-
-        $client= new Client;
-        $client->name=$request->name;
-        $client->cname=$request->cname;
-        $client->address=$request->address;
-        $client->pname=$request->pname;
-        $client->cnumber=$request->cnumber;
-       
-        $client->purl=$request->purl;
-        $client->description=$request->description;
-
-if($request->image){
-    $client->image=$request->image->store('public/client');
-}
-        
-
-
-
-        $client->save();
-
-        return back();
-
-  
-
-
+        //
     }
 
     /**
@@ -79,8 +46,7 @@ if($request->image){
      */
     public function show($id)
     {
-       // echo "hello";
-       echo "sadsa";
+        //
     }
 
     /**
@@ -92,12 +58,6 @@ if($request->image){
     public function edit($id)
     {
         //
-    }
-
-
-    public function feedback()
-    {
-       // return view('backend.client.feedback');
     }
 
     /**
@@ -120,8 +80,6 @@ if($request->image){
      */
     public function destroy($id)
     {
-        Client::find($id)->delete();
-
-        return back()->with('status','Sucessfully Deleted!!!');
+        //
     }
 }

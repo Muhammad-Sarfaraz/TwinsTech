@@ -46,11 +46,16 @@ Route::group([
 
 //Client
 Route::resource('client','ClientController');
-Route::get('client/feedback','ClientController@feedback');
+Route::get('client/destroy/{id}','ClientController@destroy');
+
+//FeedBack
+Route::get('feedback','FeedbackController@create')->name('feedback');
+Route::post('feedback/store','FeedbackController@store')->name('feedback.store');
 
 
 //Blog
 Route::resource('blog','BlogController');
+
 
 
 //Team
@@ -63,6 +68,21 @@ Route::get('slider/destroy/{id}','SliderController@destroy');
 
 
 Route::get('/dashboard','DashboardController@index')->name('admin.dashboard');
+
+//Setting
+
+//General Setting
+Route::get('settings/general-setting/','SettingController@create')->name('g.index');
+Route::get('settings/general-setting/','SettingController@create')->name('g.create');
+Route::get('settings/general-setting/','SettingController@create')->name('g.edit');
+Route::get('settings/general-setting/','SettingController@create')->name('g.store');
+
+
+//BackUp
+
+
+
+
 
 
 

@@ -61,13 +61,13 @@
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li>
-                                        <a href="email-inbox.html">Add Client</a>
+                                        <a href="{{route('client.create')}}"  class="nav-link {{ Request::is('admin/client/add')? 'active' : '' }}"  >Add Client</a>
                                     </li>
                                     <li>
-                                        <a href="email-read.html">View Client</a>
+                                        <a href="{{route('client.index')}}">View Client</a>
                                     </li>
                                     <li>
-                                        <a href="email-read.html">View Feedback</a>
+                                        <a href="{{route('feedback')}}">View Feedback</a>
                                     </li>
                                     
                                 </ul>
