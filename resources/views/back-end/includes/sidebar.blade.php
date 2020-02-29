@@ -153,7 +153,7 @@
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li>
-                                        <a href="email-inbox.html">General Information</a>
+                                        <a href="{{route('site-information.index')}}">General Information</a>
                                     </li>
                                     <li>
                                         <a href="email-read.html">Backup</a>

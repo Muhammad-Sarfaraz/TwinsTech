@@ -40,31 +40,37 @@
                             <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="" class="col-form-label">Name</label>
-                                        <input type="text" name="name" class="form-control" id="" placeholder="Name">
+                                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="" placeholder="Name">
+                                        
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="" class="col-form-label">Title</label>
-                                        <input type="text" name="title" class="form-control" id="" placeholder="Title">
+                                        <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="" placeholder="Title">
+                                   
+                                        
+                                   
+                                   
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="" class="col-form-label">Address</label>
-                                        <input type="text" name="address" class="form-control" id="" placeholder="Address">
+                                        <input type="text" name="address" class="form-control" id="" placeholder="Address" required>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6 ">
                                         <label for="" class="col-form-label">Phone Number</label>
-                                        <input type="text" name="pnumber" class="form-control" id="" placeholder="Phone Number">
+                                        <input type="text" name="pnumber" class="form-control" id="" placeholder="Phone Number" required>
+                                        <span class="text-danger">{{ $errors->first('pnumber') }}</span>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="" class="col-form-label">Email</label>
-                                        <input type="text" name="email" class="form-control" id="" placeholder="Email">
+                                        <input type="text" name="email" class="form-control" id="" placeholder="Email" required>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="" class="col-form-label">Facebook</label>
-                                        <input type="text" name="facebook" class="form-control" id="" placeholder="Facebook">
+                                        <input type="text" name="facebook" class="form-control" id="" placeholder="Facebook" >
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="" class="col-form-label">Twitter</label>
-                                        <input type="text" name="twitter" class="form-control" id="" placeholder="Twitter">
+                                        <input type="text" name="twitter" class="form-control" id="" placeholder="Twitter" >
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="" class="col-form-label">Youtube</label>
@@ -72,11 +78,12 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="" class="col-form-label">Site URL</label>
-                                        <input type="text" name="surl" class="form-control" id="" placeholder="Site URL">
+                                        <input type="text" name="surl" class="form-control" id="" placeholder="Site URL" required>
+                                        <span class="text-danger">{{ $errors->first('surl') }}</span>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="" class="col-form-label">Copyright TEXT</label>
-                                        <input type="text" name="ctext" class="form-control" id="" placeholder="Copyright TEXT">
+                                        <input type="text" name="ctext" class="form-control" id="" placeholder="Copyright TEXT" required>
                                     </div>
                                     
                                         <!-- SummerNote-->
@@ -86,16 +93,17 @@
                                                 <textarea name="description" id="summernote-editor"></textarea>
                                                 <br>
                                                 <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="customFile" name="logo">
+                                                <input type="file" class="custom-file-input @error('title') is-invalid @enderror" id="customFile" name="logo">
                                                 <label class="custom-file-label" for="customFile">Logo</label>
-                                          
+                                                <span class="text-danger">{{ $errors->first('logo') }}</span>
                                                 <br>
                                              <br>
                                             </div>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="customFile" name="flogo">
+                                            <div class="custom-file ">
+                                                <input type="file" class="custom-file-input @error('title') is-invalid @enderror" id="customFile" name="flogo">
                                                 <label class="custom-file-label" for="customFile">favicon</label>
-                                          
+                                               
+                                                <span class="text-danger">{{ $errors->first('flogo') }}</span>
                                                 
                                             </div>
                                             </div> <!-- end summernote-editor-->

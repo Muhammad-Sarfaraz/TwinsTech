@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\SiteInformation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class SiteInformationController extends Controller
 {
@@ -35,7 +38,35 @@ class SiteInformationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+
+            'logo' => 'required|mimes:png',
+            'flogo' => 'required|mimes:png',
+            'surl' => 'required',
+            'pnumber' => 'required'
+
+        ]);
+
+        $data = new SiteInformation();
+
+        $data->name=$request->name;
+        $data->title=$request->title;
+        $data->description=$request->description;
+        $data->pnumber=$request->pnumber;
+        $data->surl=$request->surl;
+        $data->facebook=$request->facebook;
+        $data->twitter=$request->twitter;
+        $data->youtube=$request->youtube;
+        $data->email=$request->email;
+        $data->ctext=$request->ctext;
+        $data->address=$request->address;
+        $data->flogo=$request->flogo->store('public/back-end/setting/site');
+        $data->logo=$request->logo->store('public/back-end/setting/site');
+
+        $data->save();
+
+        return back()->with('status','Successfully Data Inserted!!!');
+        
     }
 
     /**
