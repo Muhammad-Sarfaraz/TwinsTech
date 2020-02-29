@@ -158,6 +158,7 @@
 
                       <th style="width:80px;">SL#</th>
                       <th style="width:80px;">ID</th>
+                      <th style="width:80px;">Display</th>
              
                       <th style="width:300px;">Feedback</th>
                       <th>Action</th>
@@ -166,28 +167,27 @@
                     </tr>
                   </thead>
                   <tbody>
-                
-       
+                  <?php $number = 1; ?>
+       @forelse($feedbacks as $feedback)
             
                       <tr>
-                        <td></td>
+                        <td>{{$number}}</td>
+                       
                      
-                        <td style="display:none;"></td>
-                        <td style="display:none;"></td>
+                        <td >{{$feedback->client_id}}</td>
+                        <td>{{$feedback->active}}</td>
+                        <td >{!! $feedback->description !!}</td>
                         
-                        <td></td>
-                        <td>
-
-                          <div class="col-md-12">
-                         
-                        </td>
+                       
                         <td>
                           <div class="col-md-12">
                             
-                            <button type="button" onclick="location.href='';"  class="dmctg btn btn-danger btn-xs" >Delete</button>
+                            <button type="button" onclick="location.href='{{ url('/admin/feedback/delete/') }}/{{$feedback->id}}';"  class="dmctg btn btn-danger btn-xs" >Delete</button>
                         </td>
                       </tr>
-                               
+                      <?php $number++; ?>
+                          @empty
+                      @endforelse
                   </tbody>
                 </table>
               </div>
@@ -224,10 +224,21 @@
 
 @endsection
 
-@section('script')
+@section('extraURL')
 <!-- Summernote js -->
 <script src="{{asset('/')}}back-end/assets/libs/summernote/summernote-bs4.min.js"></script>
 
 <!-- Init js -->
 <script src="{{asset('/')}}back-end/assets/js/pages/form-summernote.init.js"></script>
+
+
+@endsection
+
+@section('script')
+
+    @if(Session::has("status"))
+      toastr.success("{{ Session::get('status')}}");
+
+        @endif
+
 @endsection

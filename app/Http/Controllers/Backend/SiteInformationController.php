@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Feedback;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-
-class FeedbackController extends Controller
+class SiteInformationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +14,7 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-        //
+       return view('back-end.setting.site-information');
     }
 
     /**
@@ -26,8 +24,7 @@ class FeedbackController extends Controller
      */
     public function create()
     {
-        $feedbacks=Feedback::get()->all();
-        return view('back-end.client.feedback')->with(compact('feedbacks'));
+        //
     }
 
     /**
@@ -38,13 +35,7 @@ class FeedbackController extends Controller
      */
     public function store(Request $request)
     {
-        $feedback=new Feedback();
-        $feedback->client_id=$request->client_id;
-        $feedback->description=$request->description;
-
-        $feedback->save();
-
-        return back();
+        //
     }
 
     /**
@@ -89,9 +80,6 @@ class FeedbackController extends Controller
      */
     public function destroy($id)
     {
-        //dd($id);
-
-        Feedback::find($id)->delete();
-        return back()->with('status','Deleted Successfully!!!');
+        //
     }
 }

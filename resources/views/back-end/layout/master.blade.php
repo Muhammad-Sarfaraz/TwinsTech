@@ -18,6 +18,7 @@
         <link href="{{asset('/')}}back-end/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
          <!-- plugin css -->
         <link href="http://127.0.0.1:8000/back-end/assets/libs/jquery-vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+        <link href="http://127.0.0.1:8000/back-end/assets/libs/toastr/toastr.css" rel="stylesheet" type="text/css" />
         <link href="{{asset('/')}}back-end/assets/css/app.min.css" rel="stylesheet" type="text/css" />
  <!-- Summernote css -->
  <link href="{{asset('/')}}back-end/assets/libs/summernote/summernote-bs4.css" rel="stylesheet" type="text/css" />
@@ -66,6 +67,7 @@
         <script src="{{asset('/')}}back-end/assets/libs/apexcharts/apexcharts.min.js"></script>
         <script src="{{asset('/')}}back-end/assets/libs/jquery-vectormap/jquery-jvectormap-1.2.2.min.js"></script>
         <script src="{{asset('/')}}back-end/assets/libs/jquery-vectormap/jquery-jvectormap-us-merc-en.js"></script>
+        <script src="{{asset('/')}}back-end/assets/libs/toastr/toastr.min.js"></script>
 
         <!-- Dashboard init -->
         <script src="{{asset('/')}}back-end/assets/js/pages/dashboard-1.init.js"></script>
@@ -75,6 +77,16 @@
         
         <!-- App js -->
         <script src="{{asset('/')}}back-end/assets/js/app.min.js"></script>
-        @yield('script')
+        
+        @yield('extraURL')
+
+      
+
+        <script>
+  @yield('script')
+</script>
+
+        
+
     </body>
 </html>

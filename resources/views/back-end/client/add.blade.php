@@ -77,10 +77,15 @@
                                                 <label for="" class="col-form-label">Description </label>
                                                 <textarea name="description" id="summernote-editor"></textarea>
                                                 </br>
-                                                <input type="file" class="form-control" name="image">
+                                                <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="customFile" name="image">
+                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                                <br>
+                                             <br>
+                                            </div>
                                             </div> <!-- end summernote-editor-->
-                                            <br>
-
+                                            
+                                            
                                             <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
 
                             </form>
@@ -95,10 +100,22 @@
 
 @endsection
 
-@section('script')
+@section('extraURL')
 <!-- Summernote js -->
 <script src="{{asset('/')}}back-end/assets/libs/summernote/summernote-bs4.min.js"></script>
 
 <!-- Init js -->
 <script src="{{asset('/')}}back-end/assets/js/pages/form-summernote.init.js"></script>
+@endsection
+
+@section('script')
+
+
+@section('script')
+
+    @if(Session::has("status"))
+      toastr.success("{{ Session::get('status')}}");
+
+        @endif
+
 @endsection

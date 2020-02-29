@@ -19,9 +19,9 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Upvex</a></li>
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                                <li class="breadcrumb-item active">Summernote</li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Project</a></li>
+                                <li class="breadcrumb-item active">View</li>
                             </ol>
                         </div>
                         <h4 class="page-title">Admin/Portfolio</h4>
@@ -79,3 +79,16 @@
 
 
 @endsection
+
+@section('script')
+
+
+
+@if(Session::has("status"))
+      toastr.success("{{ Session::get('status')}}");
+
+    @endif
+
+
+
+    @endsection

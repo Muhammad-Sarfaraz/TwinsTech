@@ -18,9 +18,9 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Upvex</a></li>
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                                <li class="breadcrumb-item active">Summernote</li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Project</a></li>
+                                <li class="breadcrumb-item active">Create</li>
                             </ol>
                         </div>
                         <h4 class="page-title">Admin/Project</h4>
@@ -53,7 +53,12 @@
                                                 <label for="" class="col-form-label">Project Description </label>
                                                 <textarea name="description" id="summernote-editor"></textarea>
                                                 </br>
-                                                <input type="file" class="form-control" name="image">
+                                                <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="customFile" name="image">
+                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                                <br>
+                                             <br>
+                                            </div>
                                             </div> <!-- end summernote-editor-->
                                             <br>
 
@@ -71,10 +76,19 @@
 
 @endsection
 
-@section('script')
+@section('extraURL')
 <!-- Summernote js -->
 <script src="{{asset('/')}}back-end/assets/libs/summernote/summernote-bs4.min.js"></script>
 
 <!-- Init js -->
 <script src="{{asset('/')}}back-end/assets/js/pages/form-summernote.init.js"></script>
+@endsection
+
+@section('script')
+
+    @if(Session::has("status"))
+      toastr.success("{{ Session::get('status')}}");
+
+        @endif
+
 @endsection

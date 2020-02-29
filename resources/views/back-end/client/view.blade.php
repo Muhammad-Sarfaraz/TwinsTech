@@ -43,7 +43,7 @@
                         <table class="table table-centered mb-0" id="inline-editable">
                             <thead>
                                 <tr>
-                                    <th style="width:10px;">#</th>
+                                    <th style="width:10px;">ID</th>
                                     <th style="width:50px;">Name</th>
                                     <th style="width:100px;">Company Name</th>
                                     <th style="width:100px;">Contact Number</th>
@@ -59,25 +59,22 @@
 
 
                             <tbody>
-
+                           
                             @forelse($clients as $client)
                                 <tr>
+                                <td>{{$client->id}}</td>
                                     <td>{{$client->name}}</td>
                                     <td>{{$client->cname}}</td>
                                     <td>{{$client->cnumber}}</td>
                                     <td>{{$client->pname}}</td>
                                     <td>{{$client->address}}</td>
-                                    <td>{{$client->feedback}}</td>
-                                    <td>
-
-                         
-                          
-                        </td>
+                                    <td>{!! $client->description !!}</td>
+                                    
                                     <td><button type="button" class="btn btn-dark"  onclick="location.href='{{url('admin/client/destroy/')}}/{{$client->id}}';">Delete</button></td>
                                   
                                     
                                 </tr>
-                               
+                                
                               @empty
                               @endforelse
                             </tbody>

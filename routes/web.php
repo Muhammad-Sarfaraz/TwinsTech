@@ -51,7 +51,7 @@ Route::get('client/destroy/{id}','ClientController@destroy');
 //FeedBack
 Route::get('feedback','FeedbackController@create')->name('feedback');
 Route::post('feedback/store','FeedbackController@store')->name('feedback.store');
-
+Route::get('feedback/delete/{id}','FeedbackController@destroy')->name('feedback.destroy');
 
 //Blog
 Route::resource('blog','BlogController');
@@ -92,6 +92,14 @@ Route::get('/portfolio','PortfolioController@index')->name('portfolio.index');
     Route::get('/portfolio/edit','PortfolioController@edit')->name('portfolio.edit');
     Route::get('/portfolio/update','PortfolioController@update')->name('portfolio.update');
     Route::get('/portfolio/delete/{id}','PortfolioController@destroy')->name('portfolio.destroy');
+
+
+
+
+Route::resource('site-information', 'SiteInformationController');
+
+
+
 
 });
 

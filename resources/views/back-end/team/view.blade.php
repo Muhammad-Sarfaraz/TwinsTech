@@ -88,3 +88,12 @@
 
 
 @endsection
+
+@section('script')
+
+    @if(Session::has("status"))
+      toastr.success("{{ Session::get('status')}}");
+
+        @endif
+
+@endsection

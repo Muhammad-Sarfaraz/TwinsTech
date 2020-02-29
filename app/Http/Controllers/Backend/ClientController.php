@@ -16,13 +16,17 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //$clients=Client::join('done', 'done.id', '=', 'work.work_done')
-        $clients=DB::table('feedback')
-        ->join('clients', 'clients.id', '=', 'feedback.client_id')
-       ->get();
-       //return view('back-end.client.view')->with(compact('clients'));
 
-       return $clients;
+      //  $clients=Client::get()->all();
+
+        //$clients=Client::join('done', 'done.id', '=', 'work.work_done')
+        $clients=DB::table('clients')
+        ->Leftjoin('feedback', 'clients.id', '=', 'feedback.client_id')
+        ->select('clients.*','feedback.description')
+       ->get();
+     return view('back-end.client.view')->with(compact('clients'));
+
+     //return $clients;
     }
 
     /**
@@ -64,7 +68,7 @@ if($request->image){
 
         $client->save();
 
-        return back();
+        return back()->with('status','Client Added Successfully!!!');
 
   
 
