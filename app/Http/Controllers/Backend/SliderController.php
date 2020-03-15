@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\backend;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Slider;
-use Illuminate\Support\Facades\Auth;
+
 
 class SliderController extends Controller
 {
