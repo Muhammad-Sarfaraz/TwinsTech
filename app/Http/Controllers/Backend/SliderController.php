@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\backend;
 
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Slider;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class SliderController extends Controller
 {
@@ -43,6 +44,11 @@ class SliderController extends Controller
 
       // Slider::insert([$request->except('_token')]);
       if(Auth::check()){
+
+        request()->validate([
+            'title' => 'min:3',
+            'image' => 'required|image'
+          ]);
 
       $image = new Slider;
 
@@ -107,7 +113,19 @@ class SliderController extends Controller
     {
       //  echo $id;
 
-      Slider::find($id)->delete();
-      return back()->with('status','Sucessfully Deleted!!!');
+      if(Auth::check()){
+        $pre = Slider::find($id);
+        $preimg = $pre->img;
+        if($preimg){
+          unlink($preimg);
+        }
+        Storage::delete($pre);
+        $pre->delete();
+
+        return back()->with('status','Sucessfully Deleted!!!');
     }
+      return back()->with('msg-error', 'Opps!! Something wrong, please try again.');
+    }
+
+      
 }
