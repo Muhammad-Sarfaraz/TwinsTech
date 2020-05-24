@@ -22,7 +22,7 @@ class CreateTeamsTable extends Migration
             $table->string('position');
             $table->string('password');
             $table->string('education');
-            $table->string('description');
+            $table->longText('description');
             $table->timestamps();
         });
     }
