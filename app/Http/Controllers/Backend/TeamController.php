@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Team;
 use Auth;
+use Validator;
 
 class TeamController extends Controller
 {
@@ -29,6 +30,7 @@ class TeamController extends Controller
     {
         return view('back-end/team/add');
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -38,20 +40,53 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        $team=new Team;
 
-        $team->name=$request->name;
-        $team->position=$request->position;
-        $team->education=$request->education;
-        $team->url=$request->url;
-        $team->description=$request->description;
-        $team->image=$request->image->store('public/backend/team');
 
-        $team->save();
+        $validator = Validator::make($request->all(), [
+            'position'    => 'required|string|max:25',
+            'image'       => 'required|image|max:10240',
+            'description' => 'nullable|max:400',
+            'email'       => 'email|max:255|unique:users',
+            'password'    => 'required|min:8|max:15',
+            'education'   => 'nullable|string|max:25',
+            'name'        => 'required|min:5|max:25',
+            'url'         => 'required|url'
+        ]);
 
-        return back()->with('status','Sucessfully Added!!!');
-       
-        
+
+        if ($validator->fails()) {
+            return back()
+                        ->withErrors($validator)
+                        ->withInput();
+            return response('Error');
+        }
+
+        $team_member=new Team;
+
+        if($file = $request->hasFile('image')) {
+            $file            = $request->file('image') ;
+            $fileName        = $file->getClientOriginalName() ;
+            $destinationPath = public_path().'/uploads/Team/' ;
+            $file->move($destinationPath,$fileName);
+            $team_member->image = $fileName;
+        }else{
+            //Avatar
+            $blank="#";
+            $team_member->image = $blank;
+        }
+
+        $team_member->url         = $request->url;
+        $team_member->name        = $request->name;
+        $team_member->email       = $request->email;
+        $team_member->position    = $request->position;
+        $team_member->education   = $request->education;
+        $team_member->description = $request->description;
+        $team_member->password    = bcrypt($request->password);
+
+        $team_member->save();
+
+        return back()->with('status','Team Member Added.');
+   
     }
 
     /**
@@ -65,6 +100,15 @@ class TeamController extends Controller
         //
     }
 
+
+    public function Team_Meamber_Data($id){
+
+        $member=Team::where('id','=',$id)->first();
+        return $member;
+    }
+
+
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -73,7 +117,8 @@ class TeamController extends Controller
      */
     public function edit($id)
     {
-        //
+        $member=$this->Team_Meamber_Data($id);
+        return view('back-end.team.edit',compact('member'));
     }
 
     /**
@@ -85,8 +130,50 @@ class TeamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $validator = Validator::make($request->all(), [
+            'position'     => 'required|string|max:25',
+            'description' => 'nullable|max:400',
+            'email'       => 'email|max:255|unique:users',
+            'password'    => 'required|min:8|max:15',
+            'education'   => 'nullable|string|max:25',
+            'name'        => 'required|min:5|max:25',
+            'url'         => 'required|url'
+        ]);
+
+
+        if ($validator->fails()) {
+            return back()
+                        ->withErrors($validator)
+                        ->withInput();
+            return response('Error');
+        }
+        
+        $team_member_update=Team::findOrFail($id);
+
+        if($file = $request->hasFile('image')) {
+            $file            = $request->file('image') ;
+            $fileName        = $file->getClientOriginalName() ;
+            $destinationPath = public_path().'/uploads/Team/' ;
+            $file->move($destinationPath,$fileName);
+            $team_member_update->image = $fileName;
+        }else{
+            $old_image=Team::findOrFail($id);
+            $image=$old_image->image;
+            $team_member_update->image = $image;
+        }
+
+        $team_member_update->url         = $request->url;
+        $team_member_update->name        = $request->name;
+        $team_member_update->email       = $request->email;
+        $team_member_update->position    = $request->position;
+        $team_member_update->education   = $request->education;
+        $team_member_update->description = $request->description;
+        $team_member_update->password    = bcrypt($request->password);
+
+    $team_member_update->update();
+
+        return back()->with('status','Team Member Updated.');
+}
 
     /**
      * Remove the specified resource from storage.
@@ -96,6 +183,16 @@ class TeamController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $team_member=Team::find($id);
+
+       $image_location=$team_member->image;
+
+       if($image_location){
+        unlink('uploads/Team/'.$image_location);
+       }
+
+       Team::findOrfail($id)->delete();
+
+       return back()->with('status','Team Member Deleted.');
     }
 }

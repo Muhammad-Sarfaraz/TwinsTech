@@ -1,21 +1,6 @@
 <?php
 
 
-
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
-
 Auth::routes();
 
 Route::group([
@@ -42,50 +27,60 @@ Route::group([
 
 //Portfolio
 
-//Dashboard
+// Dashboard
 
-//Client
-Route::resource('client','ClientController');
-Route::get('client/destroy/{id}','ClientController@destroy');
+// Client
+Route::get('/client','ClientController@index')->name('client.index');
+Route::get('/client/create','ClientController@create')->name('client.create');
+Route::post('/client/store','ClientController@store')->name('client.store');
+Route::get('/client/edit/{id}','ClientController@edit')->name('client.edit');
+Route::put('/client/update/{id}','ClientController@update')->name('client.update');
+Route::get('/client/delete/{id}','ClientController@destroy')->name('client.delete');
 
-//FeedBack
+
+
+// FeedBack
 Route::get('feedback','FeedbackController@create')->name('feedback');
 Route::post('feedback/store','FeedbackController@store')->name('feedback.store');
 Route::get('feedback/delete/{id}','FeedbackController@destroy')->name('feedback.destroy');
 
-//Blog
+// Blog
 Route::resource('blog','BlogController');
 
 
 
+// // Team
+// Route::resource('team','TeamController');
+
+
 //Team
-Route::resource('team','TeamController');
+Route::get('/team','TeamController@index')->name('team.index');
+Route::get('/team/create','TeamController@create')->name('team.create');
+Route::post('/team/store','TeamController@store')->name('team.store');
+Route::get('/team/edit/{id}','TeamController@edit')->name('team.edit');
+Route::put('/team/update/{id}','TeamController@update')->name('team.update');
+Route::get('/team/delete/{id}','TeamController@destroy')->name('team.delete');
 
 
-//Slider
+
+
+// Slider
 Route::resource('slider','SliderController');
 Route::get('slider/destroy/{id}','SliderController@destroy');
 
 
 Route::get('/dashboard','DashboardController@index')->name('admin.dashboard');
 
-//Setting
+// Setting
 
-//General Setting
+// General Setting
 Route::get('settings/general-setting/','SettingController@create')->name('g.index');
 Route::get('settings/general-setting/','SettingController@create')->name('g.create');
 Route::get('settings/general-setting/','SettingController@create')->name('g.edit');
 Route::get('settings/general-setting/','SettingController@create')->name('g.store');
 
 
-//BackUp
-
-
-
-
-
-
-
+// BackUp
 Route::get('/portfolio','PortfolioController@index')->name('portfolio.index');
     Route::get('/portfolio/create','PortfolioController@create')->name('portfolio.create');
     Route::post('/portfolio/store','PortfolioController@store')->name('portfolio.store');
@@ -98,19 +93,9 @@ Route::get('/portfolio','PortfolioController@index')->name('portfolio.index');
 
 Route::resource('site-information', 'SiteInformationController');
 
-
-
-
 });
 
-
-
-
-
-
-
-
-
-
 Route::get('/home', 'HomeController@index')->name('home');
+
+
 

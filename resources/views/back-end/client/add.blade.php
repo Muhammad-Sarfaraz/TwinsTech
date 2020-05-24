@@ -37,45 +37,64 @@
                             <p class="sub-header">Add New Client Description</p>
                             <form action="{{route('client.store')}}" method="post" enctype="multipart/form-data">
                             @csrf    
+
+
+                            @if(count($errors))
+                    <div class="alert alert-secondary">
+                        <strong>Whoops!</strong> There were some problems with your input.
+                        <br/>
+                        <ul>
+                            @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+
+
                             <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="" class="col-form-label">Name</label>
-                                        <input type="text" name="name" class="form-control" id="" placeholder="Title">
+                                        <input type="text" name="name" class="form-control" value="{{ old('name') }}" id="" placeholder="Title">
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label for="" class="col-form-label">Company Name</label>
-                                        <input type="text" name="cname" class="form-control" id="" placeholder="Company Name">
+                                        <input type="text" name="cname" class="form-control" id="" value="{{ old('cname') }}" placeholder="Company Name">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="" class="col-form-label">Contact Number</label>
-                                        <input type="text" name="cnumber" class="form-control" id="" placeholder="Contact Number">
+                                        <input type="text" name="cnumber" class="form-control" id="" value="{{ old('cnumber') }}" placeholder="Contact Number">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="" class="col-form-label">E-mail</label>
+                                        <input type="text" name="email" class="form-control" id="" value="{{ old('email') }}" placeholder="Contact Number">
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label for="" class="col-form-label">Address</label>
-                                        <input type="text" name="address" class="form-control" id="" placeholder="Address">
+                                        <input type="text" name="address" class="form-control" id="" value="{{ old('address') }}" placeholder="Address">
                                     </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="" class="col-form-label">Project Name </label>
+                                        <input type="text" name="pname" class="form-control" id="" value="{{ old('pname') }}" placeholder="Project Name">
                                     
+                                    </div>
 
-
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="" class="col-form-label">Project Name </label>
-                                            <input type="text" name="pname" class="form-control" id="" placeholder="Project Name">
-                                        </div>
+                                    
 
 
                                    
                                         <div class="form-group col-md-6">
                                             <label for="" class="col-form-label">Project URL </label>
-                                            <input type="text" name="purl" class="form-control" id="" placeholder="Project URL">
+                                            <input type="text" name="purl" class="form-control" id="" value="{{ old('purl') }}" placeholder="Project URL">
                                         </div>
                                         <!-- SummerNote-->
                                         <div class="form-row">
                                             <div class="form-group col-md-12">
                                                 <label for="" class="col-form-label">Description </label>
-                                                <textarea name="description" id="summernote-editor"></textarea>
+                                                <textarea name="description" id="summernote-editor">{{ old('description') }}</textarea>
                                                 </br>
                                                 <div class="custom-file">
                                                 <input type="file" class="custom-file-input" id="customFile" name="image">

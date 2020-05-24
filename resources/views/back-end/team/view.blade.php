@@ -67,9 +67,13 @@
                                     <td>
 
                           <div class="col-md-12">
-                          <img src="{{ Storage::url($member->image) }}" alt="" width="100px" height="100px">
+                          <img src="{{ asset("/uploads/Team/".$member->image) }}" alt="" width="100px" height="100px">
                         </td>
-                                    <td><button type="button" class="btn btn-dark"  onclick="location.href='';">Delete</button></td>
+                    <td>
+                        <button type="button" class="btn btn-dark"  onclick="location.href='{{url('admin/team/edit/'.$member->id)}}';">Edit</button>
+                        <button type="button" class="btn btn-dark"  onclick="location.href='{{url('admin/team/delete/'.$member->id)}}';">Delete</button>
+                        
+                    </td>
                                     <?php $serial++; ?>
                                     
                                 </tr>

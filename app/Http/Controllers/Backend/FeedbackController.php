@@ -19,6 +19,21 @@ class FeedbackController extends Controller
         //
     }
 
+
+
+    /**
+     * Returns the latest submitted feedback.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function indexFeedbacks()
+    {
+        return Feedback::collection(
+            Feedback::orderBy('id', 'desc')->simplePaginate(30)
+        );
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *

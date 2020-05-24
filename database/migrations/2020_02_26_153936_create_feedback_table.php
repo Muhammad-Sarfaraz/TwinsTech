@@ -18,8 +18,8 @@ class CreateFeedbackTable extends Migration
             $table->bigInteger('client_id')->nullable();
             $table->longText('description')->nullable();
             $table->bigInteger('active')->nullable();
-            
             $table->timestamps();
+            $table->foreign('client_id')->references('id')->on('client')->onDelete('cascade');
         });
     }
 

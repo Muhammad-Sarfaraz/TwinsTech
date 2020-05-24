@@ -60,7 +60,7 @@ class SliderController extends Controller
 
         $folder = "gallery/slider/";
         $pdate=date('d-m-Y');
-
+// 
 
         $image->image=$request->image->store('public/backend/gallery/slider');
        

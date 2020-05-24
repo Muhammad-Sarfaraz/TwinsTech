@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Client;
 use DB;
+use Illuminate\Support\Facades\Validator;
 
 class ClientController extends Controller
 {
@@ -47,28 +48,53 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        
-
-        $client= new Client;
-        $client->name=$request->name;
-        $client->cname=$request->cname;
-        $client->address=$request->address;
-        $client->pname=$request->pname;
-        $client->cnumber=$request->cnumber;
-       
-        $client->purl=$request->purl;
-        $client->description=$request->description;
-
-if($request->image){
-    $client->image=$request->image->store('public/client');
-}
-        
+        $validator = Validator::make($request->all(), [
+            'address'     => 'required|string|max:150',
+            'description' => 'nullable|max:400',
+            'image'       => 'required|image|max:10240',
+            'email'       => 'email|max:255|unique:users',
+            'cnumber'     => 'nullable|required',
+            'cname'       => 'required|string',
+            'pname'       => 'nullable|string|max:25',
+            'name'        => 'required|min:5|max:25',
+            'purl'        => 'required|url'
+        ]);
 
 
+        if ($validator->fails()) {
+            return back()
+                        ->withErrors($validator)
+                        ->withInput();
+            return response('Error');
+        }
 
-        $client->save();
 
-        return back()->with('status','Client Added Successfully!!!');
+        $new_client= new Client;
+
+        if($file = $request->hasFile('image')) {
+            $file            = $request->file('image') ;
+            $fileName        = $file->getClientOriginalName() ;
+            $destinationPath = public_path().'/uploads/client/' ;
+            $file->move($destinationPath,$fileName);
+            $new_client->image = $fileName;
+        }else{
+            //Avatar
+            $blank="#";
+            $new_client->image = $blank;
+        }
+
+
+        $new_client->name        = $request->name;
+        $new_client->email       = $request->email;
+        $new_client->cname       = $request->cname;
+        $new_client->address     = $request->address;
+        $new_client->pname       = $request->pname;
+        $new_client->cnumber     = $request->cnumber;
+        $new_client->purl        = $request->purl;
+        $new_client->description = $request->description;
+        $new_client->save();
+
+        return back()->with('status','Client Added Successfully.');
 
   
 
@@ -83,9 +109,25 @@ if($request->image){
      */
     public function show($id)
     {
-       // echo "hello";
-       echo "sadsa";
+       
     }
+
+
+
+
+
+    public function Client_Data($id){
+
+        $member=Client::where('id','=',$id)->first();
+        return $member;
+    }
+
+
+
+
+
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -95,7 +137,8 @@ if($request->image){
      */
     public function edit($id)
     {
-        //
+        $client=$this->Client_Data($id);
+        return view('back-end.client.edit',compact('client'));
     }
 
 
@@ -113,7 +156,54 @@ if($request->image){
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'address'     => 'required|string|max:150',
+            'description' => 'nullable|max:400',
+            'email'       => 'email|max:255|unique:users',
+            'cnumber'     => 'nullable|required',
+            'cname'       => 'required|string',
+            'pname'       => 'nullable|string|max:25',
+            'name'        => 'required|min:5|max:25',
+            'purl'        => 'required|url'
+        ]);
+
+
+        if ($validator->fails()) {
+            return back()
+                        ->withErrors($validator)
+                        ->withInput();
+            return response('Error');
+        }
+
+
+        $update_client= Client::FindOrfail($id);
+
+        if($file = $request->hasFile('image')) {
+            $file            = $request->file('image') ;
+            $fileName        = $file->getClientOriginalName() ;
+            $destinationPath = public_path().'/uploads/client/' ;
+            $file->move($destinationPath,$fileName);
+            $update_client->image = $fileName;
+        }else{
+            $old_image=Client::findOrFail($id);
+            $image=$old_image->image;
+            $update_client->image = $image;
+        }
+
+
+        $update_client->name        = $request->name;
+        $update_client->email       = $request->email;
+        $update_client->cname       = $request->cname;
+        $update_client->address     = $request->address;
+        $update_client->pname       = $request->pname;
+        $update_client->cnumber     = $request->cnumber;
+        $update_client->purl        = $request->purl;
+        $update_client->description = $request->description;
+        $update_client->update();
+
+        return back()->with('status','Client Updated Successfully.');
+
+  
     }
 
     /**
@@ -124,8 +214,16 @@ if($request->image){
      */
     public function destroy($id)
     {
-        Client::find($id)->delete();
+        $client=Client::find($id);
 
-        return back()->with('status','Sucessfully Deleted!!!');
+        $image_location=$client->image;
+ 
+        if($image_location){
+         unlink('uploads/Team/'.$image_location);
+        }
+ 
+        Team::findOrfail($id)->delete();
+ 
+        return back()->with('status','Client Deleted Successfully.');
     }
 }

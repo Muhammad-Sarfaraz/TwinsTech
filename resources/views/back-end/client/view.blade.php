@@ -70,7 +70,10 @@
                                     <td>{{$client->address}}</td>
                                     <td>{!! $client->description !!}</td>
                                     
-                                    <td><button type="button" class="btn btn-dark"  onclick="location.href='{{url('admin/client/destroy/')}}/{{$client->id}}';">Delete</button></td>
+                                    <td>
+                                        <button type="button" class="btn btn-dark"  onclick="location.href='{{url('admin/client/edit/'.$client->id)}}';">Edit</button>
+                                        <button type="button" class="btn btn-dark"  onclick="location.href='{{url('admin/client/destroy/')}}/{{$client->id}}';">Delete</button>
+                                    </td>
                                   
                                     
                                 </tr>

@@ -19,11 +19,11 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Team</a></li>
-                                <li class="breadcrumb-item active">Create</li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Client</a></li>
+                                <li class="breadcrumb-item active">Edit</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Admin/Team</h4>
+                        <h4 class="page-title">Admin/Client</h4>
                     </div>
                 </div>
             </div>
@@ -33,10 +33,11 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title">Team</h4>
-                            <p class="sub-header">Add New Team Member Description</p>
-                            <form action="{{route('team.store')}}" method="post" enctype="multipart/form-data">
+                            <h4 class="header-title">Client</h4>
+                            <p class="sub-header">Edit Client Description</p>
+                        <form action="{{url('admin/client/update/'.$client->id)}}" method="post" enctype="multipart/form-data">
                             @csrf    
+                            @method('PUT')
 
 
                             @if(count($errors))
@@ -53,52 +54,58 @@
 
 
 
-
                             <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="" class="col-form-label">Name</label>
-                                        <input type="text" name="name" value="{{ old('name')}}"class="form-control" id="" placeholder="Name">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="" class="col-form-label">Email</label>
-                                        <input type="text" name="email" value="{{ old('email') }}" class="form-control" id="" placeholder="Email">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="" class="col-form-label">Password</label>
-                                        <input type="text" name="password"  class="form-control" id="" placeholder="Password">
+                                        <input type="text" name="name" class="form-control" value="{{ $client->name }}" id="" placeholder="Title">
                                     </div>
 
                                     <div class="form-group col-md-6">
-                                        <label for="" class="col-form-label">Position</label>
-                                        <input type="text" name="position" value="{{ old('position') }}" class="form-control" id="" placeholder="Position">
+                                        <label for="" class="col-form-label">Company Name</label>
+                                        <input type="text" name="cname" class="form-control" id="" value="{{ $client->cname }}" placeholder="Company Name">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="" class="col-form-label">Contact Number</label>
+                                        <input type="text" name="cnumber" class="form-control" id="" value="{{ $client->cnumber }}" placeholder="Contact Number">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="" class="col-form-label">E-mail</label>
+                                        <input type="text" name="email" class="form-control" id="" value="{{ $client->email }}" placeholder="Contact Number">
                                     </div>
 
                                     <div class="form-group col-md-6">
-                                        <label for="" class="col-form-label">Education</label>
-                                        <input type="text" name="education" value="{{ old('education') }}" class="form-control" id="" placeholder="Education">
+                                        <label for="" class="col-form-label">Address</label>
+                                        <input type="text" name="address" class="form-control" id="" value="{{ $client->address }}" placeholder="Address">
                                     </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="" class="col-form-label">Project Name </label>
+                                        <input type="text" name="pname" class="form-control" id="" value="{{ $client->pname }}" placeholder="Project Name">
+                                    
+                                    </div>
+
                                     
 
-  
+
+                                   
                                         <div class="form-group col-md-6">
-                                            <label for="" class="col-form-label">Social Media URL </label>
-                                            <input type="text" name="url" value="{{ old('url') }}" class="form-control" id="" placeholder="Social Media URL">
+                                            <label for="" class="col-form-label">Project URL </label>
+                                            <input type="text" name="purl" class="form-control" id="" value="{{ $client->purl }}" placeholder="Project URL">
                                         </div>
                                         <!-- SummerNote-->
                                         <div class="form-row">
                                             <div class="form-group col-md-12">
                                                 <label for="" class="col-form-label">Description </label>
-                                                <textarea name="description" {{ old('description') }} id="summernote-editor">{{ old('description') }}</textarea>
+                                                <textarea name="description" id="summernote-editor">value="{{ $client->description }}"</textarea>
                                                 </br>
                                                 <div class="custom-file">
                                                 <input type="file" class="custom-file-input" id="customFile" name="image">
                                                 <label class="custom-file-label" for="customFile">Choose file</label>
                                                 <br>
                                              <br>
-                               
+                                            </div>
                                             </div> <!-- end summernote-editor-->
-                                            <br>
-
+                                            
+                                            
                                             <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
 
                             </form>
@@ -120,6 +127,9 @@
 <!-- Init js -->
 <script src="{{asset('/')}}back-end/assets/js/pages/form-summernote.init.js"></script>
 @endsection
+
+@section('script')
+
 
 @section('script')
 
