@@ -7,9 +7,30 @@ use Illuminate\Http\Request;
 use App\Models\Client;
 use DB;
 use Illuminate\Support\Facades\Validator;
-
+use TwinsTech\cache\ech;
+use TwinsTech\Mathematics\Weight;
+use TwinsTech\Helpers\Hel;
+use App\Queries\SearchThreads;
+use TwinsTech\Helpers\Status;
+use TwinsTech\inter\Episodes;
+use TwinsTech\inter\Episode;
 class ClientController extends Controller
 {
+    /**
+     * @var \App\Models\Client
+     */
+    private $client;
+
+    /**
+     * ClientController constructor.
+     * 
+     * @param \App\Models\Client         $client
+     */
+    public function __construct(Client $client)
+    {
+        $this->client      = $client;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -214,16 +235,75 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        $client=Client::find($id);
+  
+        $image_location=$this->client->image;
 
-        $image_location=$client->image;
- 
-        if($image_location){
-         unlink('uploads/Team/'.$image_location);
-        }
- 
-        Team::findOrfail($id)->delete();
- 
-        return back()->with('status','Client Deleted Successfully.');
+        if(file_exists('uploads/Client/'.$this->client->image) AND !empty($this->client->photo)){ 
+              unlink('uploads/Client/'.$this->client->photo);
+           } 
+              try{
+                $this->client->deleteClient($id);
+                  $bug = 0;
+              }
+              catch(\Exception $e){
+                  $bug = $e->errorInfo[1];
+              } 
+        return redirect()->route('client.index')->with([
+            'alert'      => 'Client successfully deleted.',
+            'alert_type' => 'success',
+        ]);
+
+        
     }
+
+
+
+
+
+    public function ec(ech $data){
+        $data->mega();
+    }
+
+    public function we(){
+        //$mat=new Weight(500);
+        //print_r($mat->toLbs());
+    }
+
+    public function de($id){
+        $data=Hel::deleteRow($id,'teams');
+
+        
+        
+    }
+
+
+    public function Status(){
+
+        echo "dask";
+        Status::statusMessageBack();
+    }
+
+
+    public function kenel(){
+        $data=SearchThreads::get("mask");
+
+
+        print_r($data);
+    }
+
+
+    public function inter(){
+        return app(Episode::class);
+    }
+
+    public function inte(){
+        $episode = $this->inter()
+            ->get();
+
+            echo $episode;
+    }
+
+
+
+
 }

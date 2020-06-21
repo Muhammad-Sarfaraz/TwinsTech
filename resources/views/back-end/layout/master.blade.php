@@ -80,10 +80,11 @@
         
         @yield('extraURL')
 
-      
+        @include('back-end.src.toastr')
 
         <script>
   @yield('script')
+
 </script>
 
         

@@ -102,11 +102,14 @@
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li>
-                                        <a href="email-inbox.html">New Post</a>
+                                        <a href="{{route("blog.create")}}">New Post</a>
                                     </li>
                                     <li>
-                                        <a href="email-read.html">View Post</a>
+                                    <a href="{{route("blog.index")}}">View Post</a>
                                     </li>
+                                    <li>
+                                        <a href="{{route("blog.comments.view")}}">View Comments</a>
+                                </li>
                                     
                                 </ul>
                             </li>

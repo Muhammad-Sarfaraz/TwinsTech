@@ -1,29 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Backend\Helpers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Project;
 
-class FrontendController extends Controller
+class ViewsController extends Controller
 {
-
-    /**
-     * @var \App\Models\Projects
-     */
-    protected $projects;
-
-    /**
-     * FrontendController constructor.
-     *
-     * @param \App\Models\Project         $projects
-     */
-    public function __construct(Project $projects)
-    {
-        $this->projects = $projects;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -31,20 +14,7 @@ class FrontendController extends Controller
      */
     public function index()
     {
-        /**
-         * @var
-         */
-        $limit = 5;
-        /**
-         * @var
-         */
-        $sort  = 'DESC';
-
-        $portfolios = $this->projects->limit_order_by($limit, $sort);
-
-        return view('front-end.home', [
-            'portfolios' => $portfolios
-        ]);
+        //
     }
 
     /**

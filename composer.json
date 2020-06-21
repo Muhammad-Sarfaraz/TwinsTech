@@ -35,8 +35,10 @@
         }
     },
     "autoload": {
+        
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "TwinsTech\\": "app/TwinsTech/"
         },
         "classmap": [
             "database/seeds",

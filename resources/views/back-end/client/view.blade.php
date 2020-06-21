@@ -72,7 +72,7 @@
                                     
                                     <td>
                                         <button type="button" class="btn btn-dark"  onclick="location.href='{{url('admin/client/edit/'.$client->id)}}';">Edit</button>
-                                        <button type="button" class="btn btn-dark"  onclick="location.href='{{url('admin/client/destroy/')}}/{{$client->id}}';">Delete</button>
+                                        <button type="button" class="btn btn-dark"  onclick="location.href='{{url('admin/client/delete/')}}/{{$client->id}}';">Delete</button>
                                     </td>
                                   
                                     

@@ -3,47 +3,42 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\BlogComment;
 use Illuminate\Http\Request;
-use App\Project;
+use TwinsTech\Helpers\Date;
 
-class FrontendController extends Controller
+class CommentController extends Controller
 {
-
-    /**
-     * @var \App\Models\Projects
-     */
-    protected $projects;
-
-    /**
-     * FrontendController constructor.
-     *
-     * @param \App\Models\Project         $projects
-     */
-    public function __construct(Project $projects)
-    {
-        $this->projects = $projects;
-    }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+      /**
+     * @var \App\Models\Comments
+     */
+    private $comment;
+    /**
+     * CommentController constructor.
+     * 
+     * @param \App\Models\Comment         $comment
+     */
+    public function __construct(BlogComment $comment)
     {
-        /**
-         * @var
-         */
-        $limit = 5;
-        /**
-         * @var
-         */
-        $sort  = 'DESC';
+        $this->comment = $comment;
+    }
 
-        $portfolios = $this->projects->limit_order_by($limit, $sort);
 
-        return view('front-end.home', [
-            'portfolios' => $portfolios
+    public function storeComment(Request $request)
+    {
+        $blog_id     = $request->id();
+        $currentDate = Date::current_date();
+        $this->comment->storeComment($request()->all, $blog_id, $currentDate);
+
+        return back()->with([
+            'alert'      => 'Your Comment Sucessfully Saved,Wait For The Aproval',
+            'alert_type' => 'success',
         ]);
     }
 

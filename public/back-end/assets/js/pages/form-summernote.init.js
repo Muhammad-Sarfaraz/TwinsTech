@@ -1,1 +1,1 @@
-jQuery(document).ready(function(){$("#summernote-editor").summernote({height:250,minHeight:null,maxHeight:null,focus:!1}),$("#summernote-inline").summernote({airMode:!0})});
+jQuery(document).ready(function(){$("#summernote-editor").summernote({height:200,width:1000,minHeight:null,maxHeight:null,focus:!1}),$("#summernote-inline").summernote({airMode:!0})});

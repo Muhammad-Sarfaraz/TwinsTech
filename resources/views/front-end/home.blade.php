@@ -153,7 +153,10 @@
           </div>
           <div class="row">
             <!-- Team Member 1 -->
-            @forelse($ports as $portfolio)
+
+            @if(!is_null($portfolios))
+
+            @forelse($portfolios as $portfolio)
             
             <div class="col-auto mb-4">
            
@@ -164,13 +167,14 @@
                   
                   <h6 class="">{{$portfolio->title}}</h6>
                   <span class="">{!! $portfolio->description !!}</span>
+                  @empty
                 </div>
               </div>
             </div>
-<br>
-            @empty
+            <br>
+          
             @endforelse
-           
+           @endif
             
           </div>
           </div>
