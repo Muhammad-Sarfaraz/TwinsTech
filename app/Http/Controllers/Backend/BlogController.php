@@ -46,6 +46,7 @@ class BlogController extends Controller
     public function index()
     {
         $posts=$this->blog->getPosts();
+        
         return view('back-end.blog.view',[
             'posts' => $posts
         ]);
