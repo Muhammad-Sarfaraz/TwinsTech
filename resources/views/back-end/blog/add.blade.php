@@ -96,6 +96,12 @@
 
 <!-- Init js -->
 <script src="{{asset('/')}}back-end/assets/js/pages/form-summernote.init.js"></script>
+
+
+
 @endsection
 
 
+@section('script')
+    
+@endsection

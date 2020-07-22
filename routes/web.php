@@ -47,6 +47,8 @@ Route::group([
 | Endpoint: /admin/feedback
 |
 */
+    /* Feedback routes */
+
     Route::get('feedback', 'FeedbackController@create')->name('feedback');
     Route::post('feedback/store', 'FeedbackController@store')->name('feedback.store');
     Route::get('feedback/delete/{id}', 'FeedbackController@destroy')->name('feedback.destroy');
@@ -69,12 +71,8 @@ Route::group([
     Route::get('blog/delete/{id}', 'BlogController@destroy')->name('blog.destroy');
     Route::get('blog/status/update/{id}', 'BlogController@statusUpadate')->name('blog.status.upadate');
 
-
-
-
-
+    /* Blog Comment Section */
     Route::get('/view-comments-of-article', 'BlogController@viewComment')->name('blog.comments.view');
-
     Route::get('/comments/store', 'BlogController@storeComment')->name('blog.comments.store');
     Route::get('/comments/delete/{id}', 'BlogController@deleteComment')->name('blog.comments.delete');
 
@@ -86,6 +84,8 @@ Route::group([
 | Endpoint: /admin/team
 |
 */
+    /* Team routes */
+
     Route::get('/team', 'TeamController@index')->name('team.index');
     Route::get('/team/create', 'TeamController@create')->name('team.create');
     Route::post('/team/store', 'TeamController@store')->name('team.store');
@@ -101,6 +101,8 @@ Route::group([
 | Endpoint: /admin/slider
 |
 */
+    /* Slider routes */
+
     Route::resource('slider', 'SliderController');
     Route::get('slider/destroy/{id}', 'SliderController@destroy');
 
@@ -150,3 +152,10 @@ Route::get('/del/{id}', 'backend\BlogController@destroy');
 
 //yes
 
+//livewire
+Route::livewire('team','team');
+Route::livewire('blog','team');
+
+Route::get('/demo','DemoController@index');
+
+Route::get('/param','DemoController@param');

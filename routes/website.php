@@ -29,4 +29,4 @@
    return view('back-end.admin.login');
 });
 
- 
+Route::get('single', 'showprofile');
